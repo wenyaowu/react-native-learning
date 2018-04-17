@@ -7,3 +7,5 @@ export const EMPLOYEE_FORM_CHANGE = 'employee_form_change';
 export const EMPLOYEE_CREATE_INIT = 'employee_create_init';
 export const EMPLOYEE_CREATE_SUCCESS = 'employee_create_success';
 export const EMPLOYEE_FETCH_SUCCESS = 'employee_fetch_success';
+export const EMPLOYEE_UPDATE_SUCCESS = 'employee_update_success';
+export const EMPLOYEE_DELETE_SUCCESS = 'employee_delete_success';

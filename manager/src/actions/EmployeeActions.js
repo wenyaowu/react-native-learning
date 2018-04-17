@@ -5,6 +5,8 @@ import {
     EMPLOYEE_CREATE_INIT, 
     EMPLOYEE_CREATE_SUCCESS,
     EMPLOYEE_FETCH_SUCCESS,
+    EMPLOYEE_UPDATE_SUCCESS,
+    EMPLOYEE_DELETE_SUCCESS,
 } from './type';
 
 export const employeeFormChanged = ({ prop, value }) => {
@@ -14,12 +16,23 @@ export const employeeFormChanged = ({ prop, value }) => {
     };
 };
 
+export const deleteEmployee = ({ uid }) => {
+    return async (dispatch) => {
+        const { currentUser } = firebase.auth();
+        await firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove();
+        Actions.pop();
+        dispatch({ type: EMPLOYEE_DELETE_SUCCESS });
+    };
+};
+
 export const updateEmployee = ({ name, phone, shift, uid }) => {
-    return async () => {
+    return async (dispatch) => {
         const { currentUser } = firebase.auth();
         await firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift });
         Actions.pop();
+        dispatch({ type: EMPLOYEE_UPDATE_SUCCESS });
     };
 };
 
